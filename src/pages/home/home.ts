@@ -8,7 +8,9 @@ import { Jenkins } from '../../providers/jenkins';
 })
 
 export class HomePage implements OnInit {
-  jobs:any = []
+
+  jobs = []
+
   constructor(public navCtrl: NavController,
               private jenkins: Jenkins,
               private loadingCtrl:LoadingController) {}
@@ -20,10 +22,10 @@ export class HomePage implements OnInit {
     loader.present().then( () => {
         this.jenkins.getAllJobs()
             .subscribe((data) => {
-                console.log(data)
-              // this.jobs = response
+                console.log("job 0")
+                console.log(data.jobs[0])
+                this.jobs = data.jobs 
                 loader.dismiss();
-              // console.log(this.jobs)
         })
 
     });

@@ -1,19 +1,21 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+        <ion-title>Home</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Jenkins App</h3>
-
-  <p>
-    This is the future. <br>
-    <b> The best jenkins mobile app ever made.</b> <br>
-    <img src="http://www.upidev.com/wp-content/uploads/2016/11/upidev-integration-continue.jpg" />
-  </p>
-
+    <ion-list>
+        <ion-item *ngFor="let job of jobs">
+            <ion-thumbnail item-start>
+                <img src="assets/imgs/green.png">
+            </ion-thumbnail>
+            <h2>{{job.name}}</h2>
+            <p>{{job._class.split(".").slice(-1)[0]}}</p>
+            <button ion-button clear item-end (click)="runJob(job)">Run</button>
+        </ion-item>
+    </ion-list>
 </ion-content>
