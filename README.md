@@ -8,4 +8,5 @@ A Native Mobile Application for Jenkins.
 
 ## DEMO
 
-![DEMP](https://github.com/ayoubensalem/jenkins-ionic/blob/master/demo/demo.png)
+![DEMO](https://github.com/ayoubensalem/jenkins-ionic/blob/master/demo/demo.png)
+![DEMO1](https://github.com/ayoubensalem/jenkins-ionic/blob/master/demo/demo1.png)
