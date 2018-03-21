@@ -1,8 +1,12 @@
 {
-  "name": "jenkins",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
+    "name": "jenkins",
+    "app_id": "",
+    "type": "ionic-angular",
+    "integrations": {
+        "cordova": {}
+    },
+    "proxies": [{
+        "path": "/api",
+        "proxyUrl": "http://172.16.88.143:8080/api/json"
+    }]
 }
