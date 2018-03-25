@@ -7,6 +7,6 @@
     },
     "proxies": [{
         "path": "/",
-        "proxyUrl": "http://167.99.93.192:8080"
+        "proxyUrl": "http://jenkins.dev:8080"
     }]
 }
