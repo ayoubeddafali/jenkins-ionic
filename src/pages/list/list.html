@@ -11,4 +11,9 @@
 </ion-header>
 
 <ion-content>
+<ion-list>
+      <ion-item [class]="getBackround(server)" *ngFor="let server of servers | async" (click)="showOptions(server)">
+        <h2> {{server.name}} </h2>
+      </ion-item>
+</ion-list>
 </ion-content>

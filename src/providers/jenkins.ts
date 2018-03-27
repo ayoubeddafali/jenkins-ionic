@@ -11,13 +11,18 @@ export class Jenkins {
     username = `ayoub`;
     password = "19641995";
     baseUrl = `http://localhost:8100`;
+    jenkinsUrl = ``;
     jenkinsCrumb = [];
 
   constructor(public http: Http){
-    console.log("JenkinsServiceConstructore") ;
+    console.log(`Current Jenkins URL is : ${this.jenkinsUrl} `) ;
   }
 
-
+  updateCredentials(newServer){
+    // this.username = newServer.username
+    // this.password = newServer.password
+    this.jenkinsUrl = newServer.url
+  }
   getJenkinsCrumb(){
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
@@ -32,7 +37,7 @@ export class Jenkins {
     this.getJenkinsCrumb()
       .subscribe((data) => {
         let header = data._body.split(":")
-        console.log(header)
+        // console.log(header)
         let new_headers = new Headers();
         new_headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
         new_headers.append(header[0].toString(), header[1].toString())
@@ -40,14 +45,12 @@ export class Jenkins {
                   .subscribe((data) => {
                   })
       })
-  }
-
-
+}
   getAllJobs(){
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
     this.getJenkinsCrumb().subscribe((data) => {
-       console.log(data._body)
+      //  console.log(data._body)
        this.jenkinsCrumb = data._body.split(":")
     } )
     return this.http.get(`${this.baseUrl}/api/json`, {headers: headers})
@@ -71,16 +74,12 @@ export class Jenkins {
     }
 
   deleteJob(job){
-    console.log("Deleting Job")
-    console.log(`${this.baseUrl}/job/${job.name}/doDelete`)
+    // console.log("Deleting Job")
+    // console.log(`${this.baseUrl}/job/${job.name}/doDelete`)
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
     headers.append(this.jenkinsCrumb[0].toString(), this.jenkinsCrumb[1].toString())
     return this.http.post(`${this.baseUrl}/job/${job.name}/doDelete`, {} , {headers: headers})
-
-  }
-
-  getServers(){
 
   }
 }

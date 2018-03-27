@@ -28,49 +28,9 @@ export class HomePage implements OnInit {
     });
     this.jenkins.runJob(job)
     toast.present();
-    
-  } 
-  addJob(): void {
-    let prompt = this.alertCtrl.create({
-      title: 'Add Jenkins Job',
-      message: "Enter Details",
-      inputs: [
-        {
-          name: 'name',
-          placeholder: 'Name'
-        },
-        {
-          name: 'url',
-          placeholder: 'Url'
-        },
-        {
-          name: 'username',
-          placeholder: 'Username'
-        },
-        {
-          name: 'password',
-          placeholder: 'Password',
-          type: 'password'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            console.log(data);
-            this.jenkins.addServer(data)
-          }
-        }
-      ]
-    });
-    prompt.present();
+
   }
+
   deleteJob(job): void{
     let toast = this.toastCtrl.create({
       message: 'Are u sure ?',
@@ -86,7 +46,7 @@ export class HomePage implements OnInit {
       });
       loader.present().then( () => {
         this.jenkins.deleteJob(job).subscribe((data) => {
-          this.getJobs() 
+          this.getJobs()
         })
         loader.dismiss();
     });
@@ -97,17 +57,17 @@ export class HomePage implements OnInit {
   updateView(){
     this.jenkins.getUpdates()
     .subscribe((data) => {
-        console.log("job 0")
-        console.log(data.jobs[0])
-        this.jobs = data.jobs 
+        // console.log("job 0")
+        // console.log(data.jobs[0])
+        this.jobs = data.jobs
       })
   }
   getJobs(){
     this.jenkins.getAllJobs()
       .subscribe((data) => {
-          console.log("job 0")
-          console.log(data.jobs[0])
-          this.jobs = data.jobs 
+          // console.log("job 0")
+          // console.log(data.jobs[0])
+          this.jobs = data.jobs
         })
   }
 

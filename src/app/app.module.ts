@@ -7,11 +7,25 @@ import { SQLite} from '@ionic-native/sqlite'
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import {Jenkins} from '../providers/jenkins'
+import {Jenkins} from '../providers/jenkins';
+import {Servers} from '../providers/servers';
 import { JobPage } from '../pages/job/job'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+
+// AF2 Settings
+export const firebaseConfig = {
+  apiKey: "AIzaSyAuHfLe9OjAY0jsHnDNUXQvs0gXMdgX2Ho",
+  authDomain: "jenkins-597aa.firebaseapp.com",
+  databaseURL: "https://jenkins-597aa.firebaseio.com",
+  projectId: "jenkins-597aa",
+  storageBucket: "",
+  messagingSenderId: "241517424510"
+};
 
 @NgModule({
   declarations: [
@@ -24,7 +38,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,6 +54,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     Jenkins,
     SQLite,
+    Servers,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
