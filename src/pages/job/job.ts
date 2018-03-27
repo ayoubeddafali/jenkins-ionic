@@ -11,7 +11,7 @@ export class JobPage implements OnInit {
   job:any  = {};
   jobDetails = {};
   jobParameters = [];
-  jobHealth = "";
+  jobHealth = "health-80plus.png";
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public loadingCtrl: LoadingController,
@@ -26,10 +26,14 @@ export class JobPage implements OnInit {
     loader.present().then( () => {
     this.jenkins.getJobDetails(this.job)
       .subscribe((data) => {
-        // console.log(data)
+        console.log(data)
         this.jobDetails = data
-        this.jobParameters = data.property[0].parameterDefinitions;
-        this.jobHealth = data.healthReport[0].iconUrl;
+        if (data.property[0]){
+          this.jobParameters = data.property[0].parameterDefinitions ? data.property[0].parameterDefinitions : [] ;
+        }
+        if (data.healthReport[0] ){
+          this.jobHealth = data.healthReport[0];
+        }
         loader.dismiss();
       })
     });

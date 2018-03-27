@@ -3,20 +3,39 @@
         <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-        <ion-title>Home</ion-title>
+    <ion-buttons end>
+        <button ion-button color="second" icon-only (click)="addJob()"><ion-icon name="add-circle"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>Jobs</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list>
-      <ion-item *ngFor="let job of jobs">
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/{{job.color}}.png">
-        </ion-thumbnail>
-        <h2>{{ job.name }}</h2>
-        <p>{{job._class.split(".").slice(-1)[0]}}</p>
-        <a href="#" ion-button clear item-end (click)="showJob(job)"  >View</a>
-      </ion-item>
-</ion-list>
+        <ion-item-sliding *ngFor="let job of jobs">
+          <ion-item >
+              <ion-thumbnail item-start>
+                  <img src="assets/imgs/{{job.color}}.png">
+                </ion-thumbnail>
+                <h2>{{ job.name }}</h2>
+                <p>{{job._class.split(".").slice(-1)[0]}}</p>
+          </ion-item>
+          <ion-item-options side="right">
+              <button ion-button color="second" padding (click)="showJob(job)">
+                  <ion-icon name="create"></ion-icon>
+                   View
+                </button>
+            <button ion-button color="primary"  padding (click)="runJob(job)">
+              <ion-icon name="create"></ion-icon>
+               Run
+            </button>
+            <button ion-button color="danger"  padding (click)="deleteJob(job)" >
+              <ion-icon name="trash"></ion-icon>
+              Delete
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+   
 
 </ion-content>
