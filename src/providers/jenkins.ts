@@ -5,19 +5,16 @@ import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/mergeMapTo';
 import Rx from 'rxjs/Rx';
 import {Injectable} from '@angular/core';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 @Injectable()
 export class Jenkins {
-    token = `2ffd011a1070fe12c29a722fb70a48c4`;
     username = `ayoub`;
     password = "19641995";
     baseUrl = `http://localhost:8100`;
     jenkinsCrumb = [];
 
-  constructor(public http: Http, private sqlite: SQLite){
+  constructor(public http: Http){
     console.log("JenkinsServiceConstructore") ;
-    this.initDB()
   }
 
 
@@ -25,16 +22,16 @@ export class Jenkins {
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
     return this.http.get(`${this.baseUrl}//crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)`, {headers: headers})
-            .map(res => res._body);
+            .map(res => res);
     }
-  
+
   runJob(job){
     console.log("Running Job")
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
     this.getJenkinsCrumb()
       .subscribe((data) => {
-        let header = data.split(":")
+        let header = data._body.split(":")
         console.log(header)
         let new_headers = new Headers();
         new_headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
@@ -43,14 +40,15 @@ export class Jenkins {
                   .subscribe((data) => {
                   })
       })
-  } 
+  }
 
 
   getAllJobs(){
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
     this.getJenkinsCrumb().subscribe((data) => {
-       this.jenkinsCrumb = data.split(":")
+       console.log(data._body)
+       this.jenkinsCrumb = data._body.split(":")
     } )
     return this.http.get(`${this.baseUrl}/api/json`, {headers: headers})
             .map(res => res.json());
@@ -62,7 +60,7 @@ export class Jenkins {
     //         .map(res => res.json());
     return Observable.interval(10000)
                .mergeMapTo(this.http.get(`${this.baseUrl}/api/json`, {headers: headers})
-               .map((res) => res.json()));  
+               .map((res) => res.json()));
     }
 
   getJobDetails(job){
@@ -79,41 +77,10 @@ export class Jenkins {
     headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
     headers.append(this.jenkinsCrumb[0].toString(), this.jenkinsCrumb[1].toString())
     return this.http.post(`${this.baseUrl}/job/${job.name}/doDelete`, {} , {headers: headers})
-    
-  } 
 
-  initDB(){
-    this.sqlite.create({
-      name: 'data.db',
-      location: 'default'
-    })
-      .then((db: SQLiteObject) => {
-        db.executeSql('create table servers(name VARCHAR(32), url VARCHAR(32), ' +
-          'username VARCHAR(32), ' +
-          'password VARCHAR(32))', {})
-          .then(() => console.log('Executed SQL'))
-          .catch(e => console.log(e));
-      })
-      .catch(e => console.log(e));
   }
-  addServer(data){
-    this.sqlite.create({
-      name: 'data.db',
-      location: 'default'
-    })
-      .then((db: SQLiteObject) => {
-        db.executeSql("INSERT INTO servers VALUES (data.name, data.url, data.username, data.password) ", {})
-      })
-      .catch(e => console.log(e))
-  }
+
   getServers(){
-    this.sqlite.create({
-      name: 'data.db',
-      location: 'default'
-    })
-      .then((db: SQLiteObject) => {
-        console.log("DB")
-        console.log(db)
-      })
+
   }
 }
