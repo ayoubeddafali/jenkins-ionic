@@ -2,7 +2,7 @@
 
 ## Description
 
-A Native Mobile Application for Jenkins.
+ :fire: The Next Jenkins Mobile App :fire:
 
 **Release date : SOMEDAY**
 
