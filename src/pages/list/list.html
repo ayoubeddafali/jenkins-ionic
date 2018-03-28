@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-buttons end>
-      <button ion-button color="second" icon-only (click)="addServer()"><ion-icon name="add-circle"></ion-icon></button>
+      <button ion-button icon-only (click)="addServer()"><ion-icon name="add-circle"></ion-icon></button>
     </ion-buttons>
     <ion-title>Servers</ion-title>
   </ion-navbar>
@@ -12,7 +12,7 @@
 
 <ion-content>
 <ion-list>
-      <ion-item [class]="getBackround(server)" *ngFor="let server of servers | async" (click)="showOptions(server)">
+      <ion-item [style.background]="getBackground(server)" *ngFor="let server of servers | async" (click)="showOptions(server)">
         <h2> {{server.name}} </h2>
       </ion-item>
 </ion-list>

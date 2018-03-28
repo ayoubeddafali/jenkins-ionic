@@ -25,9 +25,9 @@ export class ListPage implements OnInit {
       this.serversLists.subscribe();
   }
 
-  getBackround(server){
+  getBackground(server){
     if (server.state == "actif"){
-      return "activated";
+      return "green";
     }
   }
   addJenkinsServer(data){
