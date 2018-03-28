@@ -36,11 +36,13 @@ export class Jenkins {
     headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
     this.getJenkinsCrumb()
       .subscribe((data) => {
-        let header = data._body.split(":")
+        // let header = data._body.split(":")
+        let crumb = data["_body"]
+        this.jenkinsCrumb = crumb.split(":")
         // console.log(header)
         let new_headers = new Headers();
         new_headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
-        new_headers.append(header[0].toString(), header[1].toString())
+        new_headers.append(this.jenkinsCrumb[0].toString(), this.jenkinsCrumb[1].toString())
         this.http.post(`${this.baseUrl}/job/${job.name}/build`, {} , {headers: new_headers})
                   .subscribe((data) => {
                   })
@@ -50,8 +52,8 @@ export class Jenkins {
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
     this.getJenkinsCrumb().subscribe((data) => {
-      //  console.log(data._body)
-       this.jenkinsCrumb = data._body.split(":")
+      let crumb = data["_body"]
+      this.jenkinsCrumb = crumb.split(":")
     } )
     return this.http.get(`${this.baseUrl}/api/json`, {headers: headers})
             .map(res => res.json());
