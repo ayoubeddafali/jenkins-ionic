@@ -19,12 +19,12 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // AF2 Settings
 export const firebaseConfig = {
-  apiKey: "AIzaSyAuHfLe9OjAY0jsHnDNUXQvs0gXMdgX2Ho",
-  authDomain: "jenkins-597aa.firebaseapp.com",
-  databaseURL: "https://jenkins-597aa.firebaseio.com",
-  projectId: "jenkins-597aa",
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
   storageBucket: "",
-  messagingSenderId: "241517424510"
+  messagingSenderId: ""
 };
 
 @NgModule({

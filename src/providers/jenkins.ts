@@ -8,8 +8,8 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class Jenkins {
-    username = `ayoub`;
-    password = "19641995";
+    username = `<username>`;
+    password = "<password>";
     baseUrl = `http://localhost:8100`;
     jenkinsUrl = ``;
     jenkinsCrumb = [];

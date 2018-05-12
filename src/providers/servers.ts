@@ -9,7 +9,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable()
 export class Servers {
-  baseurl = "https://jenkins-597aa.firebaseio.com/servers.json"
+  baseurl = "https://<application>.firebaseio.com/servers.json"
   servers: AngularFireList<any>;
   constructor(public http: Http, afd: AngularFireDatabase){
     console.log("Servers Constructor") ;
